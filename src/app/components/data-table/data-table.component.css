@@ -1,0 +1,83 @@
+.data-table {
+  max-width: 900px;
+
+  margin: 0px 30px;
+  padding: 20px 50px;
+
+  background-color: var(--card-background-color);
+
+  box-shadow: 0px 3px 6px #00000025;
+}
+
+.data-table .header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.data-table .header .title {
+  font-size: 1em;
+}
+
+.data-table .header .filter {
+  font-size: 1em;
+
+  background-color: var(--background-color);
+
+  border: none;
+  outline: none;
+
+  padding: 5px 10px;
+
+  border-radius: 5px;
+  border-bottom: 2px solid transparent;
+}
+
+.data-table .header .filter:focus {
+  box-shadow: inset 0px 0px 6px 3px #00000025;
+}
+
+.data-table .header .filter:valid {
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 2px solid var(--brand-color);
+}
+
+.table-pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-button {
+  min-width: 1.5em;
+  min-height: 1.5em;
+
+  font-size: 1em;
+  color: white;
+
+  background-color: var(--brand-color);
+
+  margin: 5px;
+
+  border: none;
+  border-radius: 5px;
+
+  transition: 0.1s ease;
+
+  box-shadow: 0px 3px 6px #00000025;
+}
+
+.pagination-button:hover {
+  cursor: pointer;
+  background-color: var(--brand-color-highlight);
+}
+
+.pagination-button:active {
+  transform: translateY(3px);
+}
+
+.pagination-button.active {
+  background-color: var(--brand-color-highlight);
+}

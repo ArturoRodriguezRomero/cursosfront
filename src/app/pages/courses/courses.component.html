@@ -1,0 +1,38 @@
+<section class="courses-section">
+  <div class="data-table">
+    <div class="header">
+      <h1 class="title">Courses</h1>
+      <input type="text" class="filter" placeholder="Filter..." required>
+    </div>
+
+    <table class="table" mat-table [dataSource]=courses>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let courses; columns: columns"></tr>
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef> Active </th>
+        <td mat-cell *matCellDef="let course"> {{course.active}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let course"> {{course.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef> Level </th>
+        <td mat-cell *matCellDef="let course"> {{course.level}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="teacher">
+        <th mat-header-cell *matHeaderCellDef> Teacher </th>
+        <td mat-cell *matCellDef="let course"> <a>{{course.teacher.name}}</a></td>
+      </ng-container>
+    </table>
+
+    <div class="table-pagination">
+      <button class="pagination-button">1</button>
+      <button class="pagination-button active">2</button>
+      <button class="pagination-button">3</button>
+    </div>
+  </div>
+</section>

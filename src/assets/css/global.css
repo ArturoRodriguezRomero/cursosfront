@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+
+:root {
+  --brand-color: #f8a602;
+  --brand-color-highlight: #fdd03a;
+  --background-color: #f8f7f5;
+  --card-background-color: white;
+
+  --font-color: #707070;
+  --font-family: 'Roboto', sans-serif;
+  --font-size: 20px;
+
+  --header-height: 100px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--font-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}

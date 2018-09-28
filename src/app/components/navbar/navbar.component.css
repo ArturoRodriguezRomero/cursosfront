@@ -1,0 +1,33 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.navbar .button {
+  text-decoration: none;
+
+  color: white;
+  background-color: var(--brand-color);
+
+  padding: 5px 10px;
+  margin: 10px;
+
+  border-radius: 5px;
+
+  box-shadow: 0px 3px 6px #00000025;
+
+  transition: 0.1s ease;
+}
+
+.navbar .button:hover {
+  background-color: var(--brand-color-highlight);
+}
+
+.navbar .button:active {
+  transform: translateY(3px);
+}
+
+.navbar .button.active {
+  background-color: var(--brand-color-highlight);
+}
