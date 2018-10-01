@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Course } from '../../models/Course';
+import { environment } from '../../../environments/environment';
+import { ServerResponse } from '../../models/ServerResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,11 @@ export class CoursesService {
 
   constructor(private http: HttpClient) {}
 
-  public getCourses() {
-    return this.http.get<Course[]>(`${this.endpoint}`);
+  public getCourses(page: number, filter: string) {
+    return this.http.get<ServerResponse>(
+      `${this.endpoint}?page=${page}&size=${environment.pageSize}${
+        filter != null ? `&name=${filter}` : ''
+      }`
+    );
   }
 }

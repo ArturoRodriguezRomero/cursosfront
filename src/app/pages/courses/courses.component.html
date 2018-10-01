@@ -2,7 +2,7 @@
   <div class="data-table">
     <div class="header">
       <h1 class="title">Courses</h1>
-      <input type="text" class="filter" placeholder="Filter..." required>
+      <input [formControl]="filterControl" type="text" class="filter" placeholder="Filter..." required>
     </div>
 
     <table class="table" mat-table [dataSource]=courses>
@@ -25,14 +25,15 @@
 
       <ng-container matColumnDef="teacher">
         <th mat-header-cell *matHeaderCellDef> Teacher </th>
-        <td mat-cell *matCellDef="let course"> <a>{{course.teacher.name}}</a></td>
+        <td mat-cell *matCellDef="let course"> <a [routerLink]="[ '/teachers']" [queryParams]="{ name: course.teacher.name}">{{course.teacher.name}}</a></td>
       </ng-container>
     </table>
 
     <div class="table-pagination">
-      <button class="pagination-button">1</button>
-      <button class="pagination-button active">2</button>
-      <button class="pagination-button">3</button>
+      <button class="pagination-button" *ngFor="let paginationButtons of pages; let index=index" (click)="changePageTo(index)"
+        [ngClass]="{'active': currentPage == index}">
+        {{ index + 1 }}
+      </button>
     </div>
   </div>
 </section>

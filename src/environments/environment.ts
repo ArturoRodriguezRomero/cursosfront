@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  pageSize: 5,
-  apiURL: 'http://localhost:8080'
+  pageSize: 2,
+  apiURL: 'http://localhost:8080',
+  typeDebounceTime: 500
 };
 
 /*

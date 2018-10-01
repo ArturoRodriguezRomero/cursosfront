@@ -45,6 +45,12 @@
 
 .table {
   font-weight: lighter;
+  width: 100%;
+  font-size: 1em;
+}
+
+.table thead tr th {
+  font-weight: normal;
 }
 
 .table-pagination {

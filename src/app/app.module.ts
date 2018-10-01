@@ -15,7 +15,7 @@ import { AppRoutingModule } from './router/app-routing/app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiUrlInterceptor } from './services/interceptors/api.url.interceptor';
 
-import { MatTableModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,9 @@ import { MatTableModule } from '@angular/material';
     AppRoutingModule,
     ComponentsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     HttpClientModule,

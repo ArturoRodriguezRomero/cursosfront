@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CoursesService } from '../../services/courses/courses.service';
-import { Observable } from 'rxjs';
 import { Course } from '../../models/Course';
+
+import { FormControl } from '@angular/forms';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-courses',
@@ -9,29 +16,71 @@ import { Course } from '../../models/Course';
   styleUrls: ['./courses.component.css', '../../../assets/css/data-table.css']
 })
 export class CoursesComponent implements OnInit {
-  private mockData = JSON.parse(
-    `{"content":[{"name":"Metodologías ágiles","active":true,"level":"ELEMENTARY","teacher":{"name":"Roberto Canales"}},{"name":"Backup y Restore en GitLab","active":true,"level":"ELEMENTARY","teacher":{"name":"Rubén Aguilera Díaz-Heredero"}},{"name":"Instalación de GitLab con HTTPS","active":true,"level":"ELEMENTARY","teacher":{"name":"Rubén Aguilera Díaz-Heredero"}},{"name":"Kubernetes en AWS con Kops","active":true,"level":"ELEMENTARY","teacher":{"name":"Rubén Aguilera Díaz-Heredero"}},{"name":"Test E2E en Angular con Cypress","active":true,"level":"ELEMENTARY","teacher":{"name":"Rubén Aguilera Díaz-Heredero"}}],"pageable":{"sort":{"sorted":false,"unsorted":true},"offset":0,"pageSize":20,"pageNumber":0,"paged":true,"unpaged":false},"last":true,"totalPages":1,"totalElements":5,"size":20,"number":0,"numberOfElements":5,"sort":{"sorted":false,"unsorted":true},"first":true}`
-  );
-  private courses: Course[] = [];
   private columns = ['active', 'name', 'level', 'teacher'];
+  private courses: Course[] = [];
 
-  constructor(private courseService: CoursesService) {}
+  private pages: number[];
+  private currentPage: number = 0;
+
+  private filterControl = new FormControl('');
+
+  constructor(
+    private courseService: CoursesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.updateCourses();
+    this.setupFilterControlDebounce();
+    this.setFilterControlValueFromQueryParams();
+    this.updateTable();
   }
 
-  public updateCourses() {
-    console.log(this.courses);
-    this.courseService.getCourses().subscribe(
-      data => {
+  private updateTable() {
+    this.courseService
+      .getCourses(this.currentPage, this.filterControl.value)
+      .subscribe(data => {
         console.log(data);
-        this.courses = data;
-      },
-      error => {
-        console.log(error);
-      },
-      () => {}
-    );
+        this.courses = <Course[]>data.content;
+        this.pages = new Array(data.totalPages);
+      });
+    this.changeUrlParams(this.filterControl.value, this.currentPage);
+  }
+
+  private changePageTo(pageIndex: number) {
+    this.currentPage = pageIndex;
+    this.updateTable();
+  }
+
+  private filterControlCourses() {
+    this.currentPage = 0;
+    this.updateTable();
+  }
+
+  private setupFilterControlDebounce() {
+    this.filterControl.valueChanges
+      .pipe(
+        debounceTime(environment.typeDebounceTime),
+        distinctUntilChanged()
+      )
+      .subscribe(val => {
+        this.filterControlCourses();
+      });
+  }
+
+  private setFilterControlValueFromQueryParams() {
+    this.route.queryParams.subscribe(params => {
+      this.filterControl.setValue(params['name']);
+    });
+  }
+
+  private changeUrlParams(name, page) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        name: name,
+        page: page
+      }
+    });
   }
 }
