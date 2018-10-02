@@ -1,4 +1,32 @@
 <section class="courses-section">
+  <div class="form" [formGroup]="newCourseForm">
+    <div class="input-item">
+      <label class="label">Name</label>
+      <input type="text" class="input" placeholder="New Course..." formControlName="name">
+    </div>
+    <div class="input-item">
+      <label class="label">Active</label>
+      <input type="checkbox" name="" id="" formControlName="active">
+    </div>
+    <div class="input-item">
+      <label class="label">Teacher</label>
+      <select class="input" formControlName="teacher">
+        <option *ngFor="let teacher of teachers" [value]="teacher.id">{{ teacher.name }}</option>
+      </select>
+    </div>
+    <div class="input-item">
+      <label class="label">Level</label>
+      <select class="input" formControlName="level">
+        <option value="BEGINNER">BEGINNER</option>
+        <option value="ELEMENTARY">ELEMENTARY</option>
+        <option value="INTERMEDIATE">INTERMEDIATE</option>
+        <option value="ADVANCED">ADVANCED</option>
+        <option value="PROFICIENT">PROFICIENT</option>
+      </select>
+    </div>
+    <button class="submit" (click)="saveNewCourse()">Save</button>
+  </div>
+
   <div class="data-table">
     <div class="header">
       <h1 class="title">Courses</h1>
@@ -8,10 +36,6 @@
     <table class="table" mat-table [dataSource]=courses>
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
       <tr mat-row *matRowDef="let courses; columns: columns"></tr>
-      <ng-container matColumnDef="active">
-        <th mat-header-cell *matHeaderCellDef> Active </th>
-        <td mat-cell *matCellDef="let course"> {{course.active}} </td>
-      </ng-container>
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -26,6 +50,11 @@
       <ng-container matColumnDef="teacher">
         <th mat-header-cell *matHeaderCellDef> Teacher </th>
         <td mat-cell *matCellDef="let course"> <a [routerLink]="[ '/teachers']" [queryParams]="{ name: course.teacher.name}">{{course.teacher.name}}</a></td>
+      </ng-container>
+
+      <ng-container matColumnDef="subjects">
+        <th mat-header-cell *matHeaderCellDef> Subjects </th>
+        <td mat-cell *matCellDef="let course"> <a [routerLink]="[ '/courses', course.id, 'subjects']">Subjects</a></td>
       </ng-container>
     </table>
 

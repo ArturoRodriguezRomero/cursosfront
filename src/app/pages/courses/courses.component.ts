@@ -3,12 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/courses/courses.service';
 import { Course } from '../../models/Course';
 
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { TeachersService } from '../../services/teachers/teachers.service';
+import { Teacher } from '../../models/Teacher';
 
 @Component({
   selector: 'app-courses',
@@ -16,7 +18,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./courses.component.css', '../../../assets/css/data-table.css']
 })
 export class CoursesComponent implements OnInit {
-  private columns = ['active', 'name', 'level', 'teacher'];
+  private columns = ['name', 'level', 'teacher', 'subjects'];
   private courses: Course[] = [];
 
   private pages: number[];
@@ -24,8 +26,18 @@ export class CoursesComponent implements OnInit {
 
   private filterControl = new FormControl('');
 
+  private newCourseForm = new FormGroup({
+    name: new FormControl(''),
+    active: new FormControl('true'),
+    level: new FormControl('BEGINNER'),
+    teacher: new FormControl('1')
+  });
+
+  private teachers: Teacher[] = [];
+
   constructor(
     private courseService: CoursesService,
+    private teacherService: TeachersService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -33,6 +45,7 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {
     this.setupFilterControlDebounce();
     this.setFilterControlValueFromQueryParams();
+    this.getTeachers();
     this.updateTable();
   }
 
@@ -40,7 +53,6 @@ export class CoursesComponent implements OnInit {
     this.courseService
       .getCourses(this.currentPage, this.filterControl.value)
       .subscribe(data => {
-        console.log(data);
         this.courses = <Course[]>data.content;
         this.pages = new Array(data.totalPages);
       });
@@ -81,6 +93,28 @@ export class CoursesComponent implements OnInit {
         name: name,
         page: page
       }
+    });
+  }
+
+  private saveNewCourse() {
+    const name = this.newCourseForm.controls.name.value;
+    const active = this.newCourseForm.controls.active.value;
+    const level = this.newCourseForm.controls.level.value;
+    const teacher = this.newCourseForm.controls.teacher.value;
+
+    if (name != '') {
+      this.teacherService
+        .addCourseToTeacher(teacher, name, active, level)
+        .subscribe(data => {
+          this.updateTable();
+          this.newCourseForm.controls.name.setValue('');
+        });
+    }
+  }
+
+  private getTeachers() {
+    this.teacherService.getAllTeachers().subscribe(data => {
+      this.teachers = data.content;
     });
   }
 }

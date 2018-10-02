@@ -7,8 +7,8 @@ import { SubjectsComponent } from '../../pages/subjects/subjects.component';
 
 const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
+  { path: 'courses/:courseId/subjects', component: SubjectsComponent },
   { path: 'teachers', component: TeachersComponent },
-  { path: 'subjects', component: SubjectsComponent },
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
   { path: '**', redirectTo: '/courses' }
 ];

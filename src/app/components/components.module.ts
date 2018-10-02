@@ -5,19 +5,23 @@ import { AppRoutingModule } from '../router/app-routing/app-routing.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
 
-import { DataTableComponent } from './data-table/data-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatTableModule } from '@angular/material';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [NavbarComponent, DataTableComponent],
-  exports: [NavbarComponent, DataTableComponent, MatTableModule]
+  declarations: [NavbarComponent],
+  exports: [NavbarComponent, MatTableModule]
 })
 export class ComponentsModule {}
