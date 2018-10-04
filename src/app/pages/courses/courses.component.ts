@@ -18,28 +18,28 @@ import { Teacher } from '../../models/Teacher';
   styleUrls: ['./courses.component.css', '../../../assets/css/data-table.css']
 })
 export class CoursesComponent implements OnInit {
-  private columns = ['name', 'level', 'teacher', 'subjects'];
-  private courses: Course[] = [];
+  public columns = ['name', 'level', 'teacher', 'subjects'];
+  public courses: Course[] = [];
 
-  private pages: number[];
-  private currentPage: number = 0;
+  public pages: number[];
+  public currentPage: number = 0;
 
-  private filterControl = new FormControl('');
+  public filterControl = new FormControl('');
 
-  private newCourseForm = new FormGroup({
+  public newCourseForm = new FormGroup({
     name: new FormControl(''),
     active: new FormControl('true'),
     level: new FormControl('BEGINNER'),
     teacher: new FormControl('1')
   });
 
-  private teachers: Teacher[] = [];
+  public teachers: Teacher[] = [];
 
   constructor(
-    private courseService: CoursesService,
-    private teacherService: TeachersService,
-    private router: Router,
-    private route: ActivatedRoute
+    public courseService: CoursesService,
+    public teacherService: TeachersService,
+    public router: Router,
+    public route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class CoursesComponent implements OnInit {
     this.updateTable();
   }
 
-  private updateTable() {
+  public updateTable() {
     this.courseService
       .getCourses(this.currentPage, this.filterControl.value)
       .subscribe(data => {
@@ -59,17 +59,17 @@ export class CoursesComponent implements OnInit {
     this.changeUrlParams(this.filterControl.value, this.currentPage);
   }
 
-  private changePageTo(pageIndex: number) {
+  public changePageTo(pageIndex: number) {
     this.currentPage = pageIndex;
     this.updateTable();
   }
 
-  private filterControlCourses() {
+  public filterControlCourses() {
     this.currentPage = 0;
     this.updateTable();
   }
 
-  private setupFilterControlDebounce() {
+  public setupFilterControlDebounce() {
     this.filterControl.valueChanges
       .pipe(
         debounceTime(environment.typeDebounceTime),
@@ -80,13 +80,13 @@ export class CoursesComponent implements OnInit {
       });
   }
 
-  private setFilterControlValueFromQueryParams() {
+  public setFilterControlValueFromQueryParams() {
     this.route.queryParams.subscribe(params => {
       this.filterControl.setValue(params['name']);
     });
   }
 
-  private changeUrlParams(name, page) {
+  public changeUrlParams(name, page) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -96,7 +96,7 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  private saveNewCourse() {
+  public saveNewCourse() {
     const name = this.newCourseForm.controls.name.value;
     const active = this.newCourseForm.controls.active.value;
     const level = this.newCourseForm.controls.level.value;
@@ -112,7 +112,7 @@ export class CoursesComponent implements OnInit {
     }
   }
 
-  private getTeachers() {
+  public getTeachers() {
     this.teacherService.getAllTeachers().subscribe(data => {
       this.teachers = data.content;
     });

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from '../../models/Subject';
-import { SubjectsService } from '../../services/subjects/subjects.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -14,25 +13,25 @@ import { Course } from '../../models/Course';
   styleUrls: ['./subjects.component.css', '../../../assets/css/data-table.css']
 })
 export class SubjectsComponent implements OnInit {
-  private columns = ['id', 'name'];
-  private subjects: Subject[] = [];
+  public columns = ['id', 'name'];
+  public subjects: Subject[] = [];
 
-  private pages: number[];
-  private currentPage: number = 0;
+  public pages: number[];
+  public currentPage: number = 0;
 
-  private filterControl = new FormControl('');
+  public filterControl = new FormControl('');
 
-  private newSubjectForm = new FormGroup({
+  public newSubjectForm = new FormGroup({
     name: new FormControl('')
   });
 
-  private courseId: number = -1;
-  private course: Course;
+  public courseId: number = -1;
+  public course: Course;
 
   constructor(
-    private coursesService: CoursesService,
-    private router: Router,
-    private route: ActivatedRoute
+    public coursesService: CoursesService,
+    public router: Router,
+    public route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -42,7 +41,7 @@ export class SubjectsComponent implements OnInit {
     this.updateTable();
   }
 
-  private updateTable() {
+  public updateTable() {
     this.coursesService.getCourseById(this.courseId).subscribe(data => {
       this.course = data;
       console.log('data', data);
@@ -60,17 +59,17 @@ export class SubjectsComponent implements OnInit {
     this.changeUrlParams(this.filterControl.value, this.currentPage);
   }
 
-  private changePageTo(pageIndex: number) {
+  public changePageTo(pageIndex: number) {
     this.currentPage = pageIndex;
     this.updateTable();
   }
 
-  private filterControlCourses() {
+  public filterControlCourses() {
     this.currentPage = 0;
     this.updateTable();
   }
 
-  private setupFilterControlDebounce() {
+  public setupFilterControlDebounce() {
     this.filterControl.valueChanges
       .pipe(
         debounceTime(environment.typeDebounceTime),
@@ -81,19 +80,19 @@ export class SubjectsComponent implements OnInit {
       });
   }
 
-  private setFilterControlValueFromQueryParams() {
+  public setFilterControlValueFromQueryParams() {
     this.route.queryParams.subscribe(params => {
       this.filterControl.setValue(params['name']);
     });
   }
 
-  private setCourseIdFromParams() {
+  public setCourseIdFromParams() {
     this.route.params.subscribe(params => {
       this.courseId = params['courseId'];
     });
   }
 
-  private changeUrlParams(name, page) {
+  public changeUrlParams(name, page) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -103,7 +102,7 @@ export class SubjectsComponent implements OnInit {
     });
   }
 
-  private saveNewSubject() {
+  public saveNewSubject() {
     const name = this.newSubjectForm.controls.name.value;
     this.coursesService
       .addSubjectToCourse(this.course.id, name)

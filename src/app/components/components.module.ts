@@ -18,7 +18,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatTableModule,
     FormsModule,
-    ReactiveFormsModule,
     ReactiveFormsModule
   ],
   declarations: [NavbarComponent],

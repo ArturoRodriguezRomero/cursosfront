@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { CoursesComponent } from '../../pages/courses/courses.component';
 import { TeachersComponent } from '../../pages/teachers/teachers.component';
 import { SubjectsComponent } from '../../pages/subjects/subjects.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
   { path: 'courses/:courseId/subjects', component: SubjectsComponent },
   { path: 'teachers', component: TeachersComponent },
