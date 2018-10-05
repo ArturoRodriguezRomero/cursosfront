@@ -1,5 +1,6 @@
 import { Course } from './Course';
 import { Teacher } from './Teacher';
+import { Subject } from './Subject';
 
 interface Pageable {
   offset: number;
@@ -16,7 +17,7 @@ interface Sort {
 }
 
 export interface ServerResponse {
-  content: Array<Teacher | Course>;
+  content: Array<Teacher | Course | Subject>;
   first: boolean;
   last: boolean;
   number: number;

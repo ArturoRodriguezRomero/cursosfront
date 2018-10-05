@@ -14,9 +14,9 @@ import { Course } from '../../models/Course';
 })
 export class SubjectsComponent implements OnInit {
   public columns = ['id', 'name'];
-  public subjects: Subject[] = [];
+  public subjects: Subject[] = new Array<Subject>();
 
-  public pages: number[];
+  public pages: number[] = new Array<number>();
   public currentPage: number = 0;
 
   public filterControl = new FormControl('');
@@ -44,7 +44,6 @@ export class SubjectsComponent implements OnInit {
   public updateTable() {
     this.coursesService.getCourseById(this.courseId).subscribe(data => {
       this.course = data;
-      console.log('data', data);
     });
     this.coursesService
       .getSubjectsFromCourseId(

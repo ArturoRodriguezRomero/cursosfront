@@ -168,4 +168,154 @@ export namespace ServerResponseMocks {
       unsorted: true
     }
   };
+
+  export const SUBJECTS_RESPONSE: ServerResponse = {
+    content: [
+      {
+        id: 1,
+        name: 'Scrum',
+        course: {
+          id: 1,
+          name: 'Metodologías ágiles',
+          active: true,
+          level: 'ELEMENTARY',
+          teacher: {
+            id: 1,
+            name: 'Roberto Canales'
+          }
+        }
+      },
+      {
+        id: 2,
+        name: 'Kanban',
+        course: {
+          id: 1,
+          name: 'Metodologías ágiles',
+          active: true,
+          level: 'ELEMENTARY',
+          teacher: {
+            id: 1,
+            name: 'Roberto Canales'
+          }
+        }
+      },
+      {
+        id: 3,
+        name: 'Historias de usuario',
+        course: {
+          id: 1,
+          name: 'Metodologías ágiles',
+          active: true,
+          level: 'ELEMENTARY',
+          teacher: {
+            id: 1,
+            name: 'Roberto Canales'
+          }
+        }
+      },
+      {
+        id: 100,
+        name: 'asdasd',
+        course: {
+          id: 1,
+          name: 'Metodologías ágiles',
+          active: true,
+          level: 'ELEMENTARY',
+          teacher: {
+            id: 1,
+            name: 'Roberto Canales'
+          }
+        }
+      }
+    ],
+    pageable: {
+      sort: {
+        sorted: false,
+        unsorted: true
+      },
+      offset: 0,
+      pageSize: 4,
+      pageNumber: 0,
+      paged: true,
+      unpaged: false
+    },
+    totalPages: 1,
+    totalElements: 4,
+    last: true,
+    size: 4,
+    number: 0,
+    numberOfElements: 4,
+    first: true,
+    sort: {
+      sorted: false,
+      unsorted: true
+    }
+  };
+
+  export const COURSES_RESPONSE: ServerResponse = {
+    content: [
+      {
+        id: 1,
+        name: 'Metodologías ágiles',
+        active: true,
+        level: 'ELEMENTARY',
+        teacher: {
+          id: 1,
+          name: 'Roberto Canales'
+        }
+      },
+      {
+        id: 2,
+        name: 'Backup y Restore en GitLab',
+        active: true,
+        level: 'ELEMENTARY',
+        teacher: {
+          id: 2,
+          name: 'Rubén Aguilera Díaz-Heredero'
+        }
+      },
+      {
+        id: 3,
+        name: 'Instalación de GitLab con HTTPS',
+        active: true,
+        level: 'ELEMENTARY',
+        teacher: {
+          id: 2,
+          name: 'Rubén Aguilera Díaz-Heredero'
+        }
+      },
+      {
+        id: 4,
+        name: 'Kubernetes en AWS con Kops',
+        active: true,
+        level: 'ELEMENTARY',
+        teacher: {
+          id: 2,
+          name: 'Rubén Aguilera Díaz-Heredero'
+        }
+      }
+    ],
+    pageable: {
+      sort: {
+        sorted: false,
+        unsorted: true
+      },
+      offset: 0,
+      pageSize: 4,
+      pageNumber: 0,
+      paged: true,
+      unpaged: false
+    },
+    last: false,
+    totalPages: 6,
+    totalElements: 22,
+    size: 4,
+    number: 0,
+    numberOfElements: 4,
+    first: true,
+    sort: {
+      sorted: false,
+      unsorted: true
+    }
+  };
 }

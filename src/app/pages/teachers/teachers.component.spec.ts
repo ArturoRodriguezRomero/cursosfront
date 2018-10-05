@@ -12,32 +12,13 @@ import { CoursesComponent } from '../courses/courses.component';
 import { ServerResponseMocks } from '../../services/__mocks__/server.response.mock';
 import { SubjectsComponent } from '../subjects/subjects.component';
 import { HttpClientModule } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
-import { ServerResponse } from '../../models/ServerResponse';
 import { ActivatedRoute } from '@angular/router';
-import { Teacher } from '../../models/Teacher';
+import { teachersServiceStub } from '../../services/__mocks__/teachers.service.stub';
+import { routeStub } from '../../router/__mocks__/router.stubs';
 
 describe('TeachersComponent', () => {
   let component: TeachersComponent;
   let fixture: ComponentFixture<TeachersComponent>;
-
-  const teacherServiceStub = {
-    getTeachers(page: number, filter: string): Observable<ServerResponse> {
-      return of(ServerResponseMocks.TEACHERS_RESPONSE);
-    },
-
-    getAllTeachers(): Observable<ServerResponse> {
-      return of(ServerResponseMocks.TEACHERS_RESPONSE);
-    },
-
-    addNewTeacher(): Observable<Teacher> {
-      return of(ServerResponseMocks.TEACHER_MOCK);
-    }
-  };
-
-  const routeStub = {
-    queryParams: of({ name: 'test', page: 1 })
-  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -53,7 +34,7 @@ describe('TeachersComponent', () => {
       providers: [
         {
           provide: TeachersService,
-          useValue: teacherServiceStub
+          useValue: teachersServiceStub
         },
         {
           provide: APP_BASE_HREF,

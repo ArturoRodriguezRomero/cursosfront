@@ -52,17 +52,13 @@ describe('TeachersService', () => {
 
   it('should return expected teacher when #addNewTeacher() (HttpClient called once)', () => {
     const expectedTeacher = ServerResponseMocks.TEACHER_MOCK;
-    expectedTeacher.name = 'test name';
 
     httpClientSpy.post.and.returnValue(of(expectedTeacher));
 
     teachersService.addNewTeacher('test name').subscribe(teacher => {
-      expect(teacher.name).toEqual(
-        expectedTeacher.name,
-        'expected teacher name'
-      );
+      expect(teacher).toEqual(expectedTeacher, 'expected teacher');
+      expect(httpClientSpy.post.calls.count()).toBe(1, 'one call');
     });
-    expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   });
 
   it('should return expected course when #addCourseToTeacher() (HttpClient called once)', () => {
@@ -79,7 +75,7 @@ describe('TeachersService', () => {
       )
       .subscribe(course => {
         expect(course).toEqual(expectedCourse);
+        expect(httpClientSpy.post.calls.count()).toBe(1, 'one call');
       });
-    expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   });
 });
