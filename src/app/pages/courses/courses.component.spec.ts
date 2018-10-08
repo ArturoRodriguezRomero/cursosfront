@@ -82,6 +82,16 @@ describe('CoursesComponent', () => {
     expect(component.teachers).toEqual([], 'empty array');
   });
 
+  it('should have a #courseLevels array with proper values', () => {
+    expect(component.courseLevels).toEqual([
+      'BEGINNER',
+      'ELEMENTARY',
+      'INTERMEDIATE',
+      'ADVANCED',
+      'PROFICIENT'
+    ]);
+  });
+
   it('should set up on #ngOnInit()', () => {
     component.ngOnInit();
 

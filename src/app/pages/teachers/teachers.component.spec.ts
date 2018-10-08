@@ -102,20 +102,20 @@ describe('TeachersComponent', () => {
     expect(component.updateTable).toHaveBeenCalled();
   });
 
-  it('should set #currentPage = 0 when #filterControlCourses and #updateTable', () => {
-    component.filterControlCourses();
+  it('should set #currentPage = 0 when #filterControlTeachers and #updateTable', () => {
+    component.filterControlTeachers();
 
     expect(component.currentPage).toEqual(0);
     expect(component.updateTable).toHaveBeenCalled();
   });
 
   it('should #setupFilterControlDebounce properly', () => {
-    spyOn(component, 'filterControlCourses').and.callThrough();
+    spyOn(component, 'filterControlTeachers').and.callThrough();
 
     component.setupFilterControlDebounce();
 
     component.filterControl.valueChanges.subscribe(data =>
-      expect(component.filterControlCourses).toHaveBeenCalled()
+      expect(component.filterControlTeachers).toHaveBeenCalled()
     );
   });
 

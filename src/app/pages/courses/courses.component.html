@@ -17,11 +17,7 @@
     <div class="input-item">
       <label class="label">Level</label>
       <select class="input" formControlName="level">
-        <option value="BEGINNER">BEGINNER</option>
-        <option value="ELEMENTARY">ELEMENTARY</option>
-        <option value="INTERMEDIATE">INTERMEDIATE</option>
-        <option value="ADVANCED">ADVANCED</option>
-        <option value="PROFICIENT">PROFICIENT</option>
+        <option *ngFor="let level of courseLevels" value="{{level}}">{{ level }}</option>
       </select>
     </div>
     <button class="submit" (click)="saveNewCourse()">Save</button>

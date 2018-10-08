@@ -20,6 +20,13 @@ import { Teacher } from '../../models/Teacher';
 export class CoursesComponent implements OnInit {
   public columns = ['name', 'level', 'teacher', 'subjects'];
   public courses: Course[] = [];
+  public courseLevels: String[] = [
+    'BEGINNER',
+    'ELEMENTARY',
+    'INTERMEDIATE',
+    'ADVANCED',
+    'PROFICIENT'
+  ];
 
   public pages: number[];
   public currentPage: number = 0;

@@ -63,7 +63,7 @@ export class SubjectsComponent implements OnInit {
     this.updateTable();
   }
 
-  public filterControlCourses() {
+  public filterControlSubjects() {
     this.currentPage = 0;
     this.updateTable();
   }
@@ -75,7 +75,7 @@ export class SubjectsComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(val => {
-        this.filterControlCourses();
+        this.filterControlSubjects();
       });
   }
 

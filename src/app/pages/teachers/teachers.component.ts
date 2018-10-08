@@ -51,7 +51,7 @@ export class TeachersComponent implements OnInit {
     this.updateTable();
   }
 
-  filterControlCourses() {
+  filterControlTeachers() {
     this.currentPage = 0;
     this.updateTable();
   }
@@ -63,7 +63,7 @@ export class TeachersComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(val => {
-        this.filterControlCourses();
+        this.filterControlTeachers();
       });
   }
 
